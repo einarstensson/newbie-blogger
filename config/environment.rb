@@ -4,7 +4,6 @@ Bundler.require
 
 # ------ Require Gems used in this blog ------
 require 'active_record'
-require 'pry'
 require 'erb'
 
 # ------ Require the blog generator ------
@@ -17,7 +16,7 @@ require "./app/models/author/Author.rb"
 #The Posts
 require "./app/models/post/Post.rb"
 
-# ------ Require Models ------
+# ------ Require database seed files ------
 require "./db/seeds/posts.rb"
 require "./db/seeds/authors.rb"
 
@@ -26,8 +25,10 @@ ActiveRecord::Base.establish_connection(
   :database => "db/blog_database.db"
 )
 
-DOMAIN = "file:///Users/hlpolivy/Desktop/flatiron/newbie-blog/"
+# ------ Specify local domain file path ------
+DOMAIN = "file://" + Dir.pwd + "/"
 
+# ------ Open erb template files ------
 INDEX_TEMPLATE = File.open("./app/views/index.html.erb")
 POST_TEMPLATE = File.open("./app/views/post/post.html.erb")
 

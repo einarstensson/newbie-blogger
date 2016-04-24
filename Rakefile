@@ -16,8 +16,8 @@ task :seed do
 end
 
 # Generate the blog
-task :generate, :response do |gen_task, args|
-  blog_generator = BlogGenerator.new(args[:response])
+task :generate, :blog_name do |gen_task, args|
+  blog_generator = BlogGenerator.new(args[:blog_name])
   blog_generator.generate
 end
 

@@ -9,16 +9,17 @@ class BlogGenerator
   def generate
     build_directories
 
-    style_template = generate_style
-    render(style_template)
-    @post_templates = generate_posts
-    index_template = generate_index
+    @post_templates = render_posts
+    index_template = render_index
 
-    render(@post_templates)
-    render(index_template)
+    save(@post_templates)
+    save(index_template)
+
+    style_template = generate_style
+    save(style_template)
   end
 
-  def render(templates)
+  def save(templates)
     templates.each do |template|
       File.open("#{blog_name}#{template[:path]}", "w") do |file|
         file.write(template[:template])
@@ -40,7 +41,7 @@ class BlogGenerator
     FileUtils.mkdir_p(blog_name + "/style/")
   end
 
-  def generate_index
+  def render_index
     index_template_file = INDEX_TEMPLATE.read
 
     path = "/index.html"
@@ -49,7 +50,7 @@ class BlogGenerator
     [ { path: path, template: template } ]
   end
 
-  def generate_posts
+  def render_posts
     post_template_file = POST_TEMPLATE.read
 
     Post.all.map do |post|
