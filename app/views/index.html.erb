@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href=" <%= DOMAIN + blog_name %>/style/style.css">
+</head>
+
+<body>
+
+  <div id = "container" class="border-box">
+
+  <header>
+
+    <h1><%= author.blogtitle %></h1>
+    <h3><%= author.authorslogan %></h3>
+
+  </header>
+
+  <article>
+
+    <% for blog_post in @post_templates %>
+        <%= blog_post[:template] %>
+    <% end %>
+
+  </article>
+
+  <aside>
+
+    <h2>About</h2>
+    <%= author.author_description%>
+
+    <h2>Recent Posts</h2>
+    <% for blog_post in Post.all %>
+      <a href="<%= DOMAIN + blog_name %>/posts/<%= blog_post.title.gsub(' ', '-') %>.html">
+        <%= blog_post.title %>
+      </a><br>
+    <% end %>
+
+  </aside>
+
+  <footer>
+
+    <p>There is no such thing as copyright in the Federation</p>
+
+  </footer>
+</div>
+
+</body>
+</html>
+
