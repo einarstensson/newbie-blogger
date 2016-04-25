@@ -17,7 +17,6 @@ end
 
 # Generate the blog
 task :generate, :blog_name do |gen_task, args|
-  binding.pry
   blog_generator = BlogGenerator.new(args[:blog_name])
   blog_generator.generate
 end
